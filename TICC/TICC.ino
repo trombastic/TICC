@@ -36,11 +36,7 @@ extern const char SW_VERSION[17] = "20200412.1";    // 12 April 2020 - version 1
 
 volatile int64_t PICcount;
 int64_t tint;
-int64_t CLOCK_HZ;
-int64_t PICTICK_PS; 
 int64_t CLOCK_PERIOD;
-int16_t CAL_PERIODS;
-int16_t WRAP;
 
 config_t config;
 MeasureMode MODE, lastMODE;
@@ -115,11 +111,7 @@ void ticc_setup() {
   UserConfig(&config);
   MODE = config.MODE;
   
-  CLOCK_HZ = config.CLOCK_HZ;
-  CLOCK_PERIOD = (PS_PER_SEC/CLOCK_HZ);
-  PICTICK_PS = config.PICTICK_PS;
-  CAL_PERIODS = config.CAL_PERIODS;
-  WRAP = config.WRAP;
+  CLOCK_PERIOD = (PS_PER_SEC/config.CLOCK_HZ);
    
   for(i = 0; i < ARRAY_SIZE(channels); ++i) {
     // initialize the channels struct variables
@@ -244,7 +236,7 @@ void loop() {
          channels[i].last_tof = channels[i].tof;  // preserve last value
          channels[i].last_ts = channels[i].ts;    // preserve last value
          channels[i].tof = channels[i].read();    // get data from chip
-         channels[i].ts = (channels[i].PICstop * (int64_t)PICTICK_PS) - channels[i].tof;
+         channels[i].ts = (channels[i].PICstop * (int64_t)config.PICTICK_PS) - channels[i].tof;
          channels[i].ts -= channels[i].prop_delay;     // subtract propagation delay
          channels[i].period = channels[i].ts - channels[i].last_ts;
          channels[i].totalize++;                  // increment number of events   
@@ -258,7 +250,7 @@ void loop() {
       
          switch (config.MODE) {
            case Timestamp:
-               print_timestamp(channels[i].ts, PLACES, WRAP);
+               print_timestamp(channels[i].ts, PLACES, config.WRAP);
                Serial.print( " ch");Serial.println(channels[i].name);
            break;
        
