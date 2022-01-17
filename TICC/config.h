@@ -47,12 +47,13 @@ enum MeasureMode : unsigned char {Timestamp, Interval, Period, timeLab, Debug, N
 
 /*****************************************************************/
 // configuration structure type
-struct config_t {
-  byte       VERSION = EEPROM_VERSION;  // one byte   
+struct config_t
+{
+  byte       VERSION = EEPROM_VERSION;  // one byte
   char       SW_VERSION[17];            // up to 16 bytes plus term
-  char       BOARD_REV;                 // one byte   
-  char       SER_NUM[17];              // up to 16 bytes plus term
-  
+  char       BOARD_REV;                 // one byte
+  char       SER_NUM[17];               // up to 16 bytes plus term
+
   // global settings:
   MeasureMode MODE;                     // (T)imestamp, time (I)nterval
                                         // Time(L)ab, (P)eriod, (D)ebug (default 'T')
@@ -63,15 +64,14 @@ struct config_t {
   int16_t    TIMEOUT;                   // timeout for measurement in hex (default 0x05)
   int16_t    WRAP;                      // wraparound value for PICcount
   char       SYNC_MODE;                 // one byte:  'M' for master,  'C' for client
-  
+
   // per-channel settings, arrays of 2 for channels 0 and 1:
-  char       START_EDGE[2];            // (R)ising (default) or (F)alling edge 
-  char       NAME[2];                  // user-set channel name
-  int64_t    PROP_DELAY[2];            // user-set offset value (ps)
-  int64_t    TIME_DILATION[2];         // time dilation factor (default 2500)
-  int64_t    FIXED_TIME2[2];           // if >0 use to replace time2 (default 0)
-  int64_t    FUDGE0[2];                // fudge factor (ps) (default 0)
-  
+  char       START_EDGE[2];             // (R)ising (default) or (F)alling edge
+  char       NAME[2];                   // user-set channel name
+  int64_t    PROP_DELAY[2];             // user-set offset value (ps)
+  int64_t    TIME_DILATION[2];          // time dilation factor (default 2500)
+  int64_t    FIXED_TIME2[2];            // if >0 use to replace time2 (default 0)
+  int64_t    FUDGE0[2];                 // fudge factor (ps) (default 0)
 };
 
 /*****************************************************************/
@@ -86,26 +86,27 @@ void eeprom_clear();
 // These allow us to read/write struct in eeprom
 template <class T> int16_t EEPROM_writeAnything(int16_t ee, const T& value)
 {
-    const byte* p = (const byte*)(const void*)&value;
-    uint16_t i;
-    for (i = 0; i < sizeof(value); i++)
-    EEPROM.write(ee++, *p++);
-    return i;
+  const byte* p = (const byte*)(const void*)&value;
+  uint16_t i;
+  for (i = 0; i < sizeof(value); i++)
+  EEPROM.write(ee++, *p++);
+  return i;
 }
 
 template <class T> int16_t EEPROM_readAnything(int16_t ee, T& value)
 {
-    byte* p = (byte*)(void*)&value;
-    uint16_t i;
-    for (i = 0; i < sizeof(value); i++)
-    *p++ = EEPROM.read(ee++);
-    return i;
+  byte* p = (byte*)(void*)&value;
+  uint16_t i;
+  for (i = 0; i < sizeof(value); i++)
+  *p++ = EEPROM.read(ee++);
+  return i;
 }
 
 // read and write config struct in eeprom
 void eeprom_write_config_default (uint16_t offset);
-void print_config (config_t x);
-void software_reset();
 
+void print_config (config_t x);
+
+void software_reset();
 
 #endif	/* CONFIG_H */
