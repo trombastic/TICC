@@ -34,8 +34,8 @@ enum MeasureMode : unsigned char {Timestamp, Interval, Period, timeLab, Debug, N
 #define DEFAULT_SYNC_MODE         (char)    'M'         // (M)aster or (C)lient
 #define DEFAULT_NAME_0            (char)    'A'
 #define DEFAULT_NAME_1            (char)    'B'
-#define DEFAULT_PROP_DELAY_0      (int64_t)  0
-#define DEFAULT_PROP_DELAY_1      (int64_t)  0
+#define DEFAULT_PROP_DELAY_0      (int64_t)  0          // Porpagation Delay for Channel A
+#define DEFAULT_PROP_DELAY_1      (int64_t)  0          // Porpagation Delay for Channel B
 #define DEFAULT_START_EDGE_0      (char)    'R'         // (R)ising or (F)alling
 #define DEFAULT_START_EDGE_1      (char)    'R'         // (R)ising or (F)alling
 #define DEFAULT_TIME_DILATION_0   (int64_t) 2500        // SWAG that seems to work

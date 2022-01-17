@@ -170,7 +170,7 @@ void ticc_setup() {
   PICcount = 0;                                      // initialize counter
   enableInterrupt(COARSEint, coarseTimer, FALLING);  // enable counter interrupt
   enableInterrupt(STOP_0, catch_stop0, RISING);      // enable interrupt to catch channel A
-  enableInterrupt(STOP_1, catch_stop1, RISING);      // enable interrupt to catch channel 1
+  enableInterrupt(STOP_1, catch_stop1, RISING);      // enable interrupt to catch channel B
   digitalWrite(CLIENT_SYNC, LOW);                    // unassert -- results in ~22uS sync pulse
   pinMode(CLIENT_SYNC, INPUT);                       // set back to input just to be neat
   
