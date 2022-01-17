@@ -23,7 +23,7 @@ extern int16_t CAL_PERIODS;
 extern 
 
 // Constructor
-tdc7200Channel::tdc7200Channel(char id, int enable, int intb, int csb, int stop, int led) :
+tdc7200Channel::tdc7200Channel(char id, int enable, int16_t intb, int16_t csb, int16_t stop, int16_t led) :
 	ID(id), ENABLE(enable), INTB(intb), CSB(csb), STOP(stop), LED(led) {
 	pinMode(ENABLE,OUTPUT);
 	pinMode(INTB,INPUT);
@@ -40,8 +40,7 @@ void tdc7200Channel::tdc_setup() {
   delay(5);  
   digitalWrite(ENABLE, HIGH);  // Needs a low-to-high transition to enable
   delay(5);  // 1.5ms minimum recommended to allow chip LDO to stabilize
-
-  switch (CAL_PERIODS) { // convert actual cal periods to bitmask
+  switch (config.CAL_PERIODS) { // convert actual cal periods to bitmask
     case  2: CALIBRATION2_PERIODS = 0x00; break;
     case 10: CALIBRATION2_PERIODS = 0x40; break;
     case 20: CALIBRATION2_PERIODS = 0x80; break; // default
@@ -160,7 +159,7 @@ int64_t tdc7200Channel::read() {
   
   // calCount *= 10e6; divide back later
   // time_dilation adjusts for non-linearity at 100ns overflow
-  calCount = ((int64_t)(cal2Result - cal1Result) * (int64_t)(1000000 - time_dilation) ) / (int64_t)(CAL_PERIODS - 1); 
+  calCount = ((int64_t)(cal2Result - cal1Result) * (int64_t)(1000000 - time_dilation) ) / (int64_t)(config.CAL_PERIODS - 1); 
 
   // if FIXED_TIME2 is set, substitute measured time2Result (which should be a fixed value,
   // with any variation being noise, with the provided value.  This reduces jitter.

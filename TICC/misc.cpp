@@ -39,7 +39,7 @@ void print_unsigned_picos_as_seconds (uint64_t x, int places) {
   
 } 
 
-void print_signed_picos_as_seconds (int64_t x, int places) {
+void print_signed_picos_as_seconds (int64_t x, int16_t places) {
   int64_t sec, secx, frac, frach, fracx, fracl;    
   char str[24],str1[8],str2[8];
   
@@ -67,7 +67,7 @@ void print_signed_picos_as_seconds (int64_t x, int places) {
   Serial.print(str);
 }
 
-void print_timestamp(int64_t x, int places, int32_t wrap) {
+void print_timestamp(int64_t x, int16_t places, int32_t wrap) {
 // places is the number of places to the right of the decimal point
 // wrap is the number of integer digits to output
   
@@ -106,7 +106,7 @@ void print_timestamp(int64_t x, int places, int32_t wrap) {
 
 void print_int64(int64_t num ) {
   const static char toAscii[] = "0123456789ABCDEF";
-  int base = 10;
+  int16_t base = 10;
   
   char buffer[65];            //because you might be doing binary
   char* p = &buffer[64];      //this pointer writes into the buffer, starting at the END
@@ -118,7 +118,7 @@ void print_int64(int64_t num ) {
   do {
     // working on the least significant digit
     //put an ASCII digit at the front of the string
-    *(--p) = toAscii[(int)(num % base)];
+    *(--p) = toAscii[(int16_t)(num % base)];
 
     //knock the least significant digit off the number
     num = num / base;

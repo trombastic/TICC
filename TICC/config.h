@@ -83,19 +83,19 @@ void eeprom_clear();
 
 /*****************************************************************/
 // These allow us to read/write struct in eeprom
-template <class T> int EEPROM_writeAnything(int ee, const T& value)
+template <class T> int16_t EEPROM_writeAnything(int16_t ee, const T& value)
 {
     const byte* p = (const byte*)(const void*)&value;
-    unsigned int i;
+    uint16_t i;
     for (i = 0; i < sizeof(value); i++)
     EEPROM.write(ee++, *p++);
     return i;
 }
 
-template <class T> int EEPROM_readAnything(int ee, T& value)
+template <class T> int16_t EEPROM_readAnything(int16_t ee, T& value)
 {
     byte* p = (byte*)(void*)&value;
-    unsigned int i;
+    uint16_t i;
     for (i = 0; i < sizeof(value); i++)
     *p++ = EEPROM.read(ee++);
     return i;
