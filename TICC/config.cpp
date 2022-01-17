@@ -6,6 +6,7 @@
 // Portions Copyright George Byrkit K9TRV 2016
 // Portions Copyright Jeremy McDermond NH6Z 2016
 // Portions Copyright David McQuate WA8YWQ 2016
+// Portions Copyright Martin Schröder DC2TMS 2022
 // Licensed under BSD 2-clause license
 
 #include <stdint.h>           // define unint16_t, uint32_t

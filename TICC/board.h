@@ -6,6 +6,7 @@
 // Copyright John Ackermann N8UR 2016-2020
 // Portions Copyright George Byrkit K9TRV 2016
 // Portions Copyright Jeremy McDermond NH6Z 2016
+// Portions Copyright Martin Schröder DC2TMS 2022
 // Licensed under BSD 2-clause license
 
 #include "config.h"

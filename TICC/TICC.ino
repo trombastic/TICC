@@ -5,6 +5,7 @@
 // Copyright John Ackermann N8UR 2016-2020
 // Portions Copyright George Byrkit K9TRV 2016
 // Portions Copyright Jeremy McDermond NH6Z 2016
+// Portions Copyright Martin Schröder DC2TMS 2022
 // Licensed under BSD 2-clause license
 
 extern const char SW_VERSION[17] = "20200412.1";    // 12 April 2020 - version 1
@@ -102,7 +103,7 @@ void ticc_setup() {
   // print banner -- all non-data output lines begin with "#" so they're seen as comments
   Serial.println();
   Serial.println("# TAPR TICC Timestamping Counter");
-  Serial.println("# Copyright 2016-2020 N8UR, K9TRV, NH6Z, WA8YWQ");
+  Serial.println("# Copyright 2016-2021 N8UR, K9TRV, NH6Z, WA8YWQ, DC2TMS");
   Serial.println();
   Serial.println("#####################");
   Serial.println("# TICC Configuration: ");
