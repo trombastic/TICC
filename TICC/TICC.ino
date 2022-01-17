@@ -8,7 +8,7 @@
 // Portions Copyright Martin Schröder DC2TMS 2022
 // Licensed under BSD 2-clause license
 
-extern const char SW_VERSION[17] = "20200412.1";    // 12 April 2020 - version 1
+extern const char SW_VERSION[17] = "20220117.1";    // 17 January 2022 - version 1.1
 
 //#define DETAIL_TIMING     // if enabled, prints execution time
 
